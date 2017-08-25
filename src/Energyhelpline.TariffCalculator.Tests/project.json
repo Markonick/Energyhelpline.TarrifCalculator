@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
 
   "dependencies": {
@@ -9,7 +9,8 @@
     "NUnit": "3.5.0",
     "dotnet-test-nunit": "3.4.0-beta-3",
     "Moq": "4.7.10",
-    "CsvHelper": "2.16.3"
+    "CsvHelper": "2.16.3",
+    "Energyhelpline.TariffCalculator": "1.0.0-*"
   },
 
   "testRunner": "nunit", 

@@ -7,11 +7,12 @@ namespace Energyhelpline.TariffCalculator.Tests
     [TestFixture]
     public class TariffCalculatorTests
     {
-        private ITariffCalculator _tariffCalculator;
+        private ICalculator _calculator;
 
         [SetUp]
         public void SetUp()
         {
+            _calculator = new Calculator();
         }
 
         [TestCase(2000, 4000, 0.25, 0.5, 0.3, 0.6, "01/01/2018", 2015.55)]
@@ -29,7 +30,7 @@ namespace Energyhelpline.TariffCalculator.Tests
             var finalGasCost = Divide(daysAfterExpiration, daysPerYear) * gasUsage * finalGasRate;
             var finalElectricityCost = Divide(daysAfterExpiration, daysPerYear) * electricitUsage * finalElectricityRate;*/
 
-            var annualCost = _tariffCalculator.GetFinalCost();
+            var annualCost = _calculator.GetFinalCost();
 
             //act
             //var annualCost = Math.Round(initialGasCost + finalGasCost + initialElectricityCost + finalElectricityCost, 2);

@@ -7,20 +7,37 @@ namespace Energyhelpline.TariffCalculator.Tests
     public class TariffCalculatorTests
     {
         private ICalculator _calculator;
+        private TariffData _tariffData;
 
         [SetUp]
         public void SetUp()
         {
-            _calculator = new Calculator();
+            _tariffData = DataBuilder.Create();
+            _calculator = new Calculator(_tariffData);
         }
 
-        [TestCase(2000, 4000, 0.25, 0.5, 0.3, 0.6, "01/01/2018", 2687.4)]
-        [TestCase(1500, 3000, 0.25, 0.5, 0.3, 0.6, "01/01/2018", 2015.55)]
-        public void EnergySaver_should_calculate_correct_tariff(int gasUsage, int electricitUsage, decimal initialGasRate, decimal finalGasRate, decimal initialElectricityRate, decimal finalElectricityRate, DateTime expirationDate, decimal expectedResult)
+        [TestCase(2000, 4000, 2687.4)]
+        [TestCase(1500, 3000, 2015.55)]
+        public void EnergySaver_should_calculate_correct_tariff(decimal gasUsage, decimal electricitUsage, decimal expectedResult)
         {
-            var annualCost = _calculator.GetFinalCost(gasUsage, electricitUsage, initialGasRate, finalGasRate, initialElectricityRate, finalElectricityRate, expirationDate);
+            var annualCost = _calculator.GetFinalCost(gasUsage, electricitUsage);
             
             Assert.That(annualCost, Is.EqualTo(expectedResult));
+        }
+    }
+
+    public static class DataBuilder
+    {
+        public static TariffData Create()
+        {
+            return new TariffData
+            {
+                InitialGasRate = 0.25M,
+                FinalGasRate = 0.50M,
+                InitialElectricityRate = 0.30M,
+                FinalElectricityRate = 0.60M,
+                ExpirationDate = new DateTime(2018, 1, 1)
+            };
         }
     }
 }

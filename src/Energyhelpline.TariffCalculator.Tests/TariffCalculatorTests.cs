@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using static System.Decimal;
 
 namespace Energyhelpline.TariffCalculator.Tests
 {
@@ -12,22 +13,22 @@ namespace Energyhelpline.TariffCalculator.Tests
         }
 
         //[TestCase(0.2, 0.4, 0.20, 0.40, "01/01/2018", 100)]
-        [TestCase(1500, 3000, 0.25f, 0.5f, 0.3f, 0.6f, "01/01/2018", 2015.55f)]
-        public void EnergySaver_should_calculate_correct_tariff(int gasUsage, int electricitUsage, float initialGasRate, float finalGasRate, float initialElectricityRate, float finalElectricityRate, DateTime expirationDate, float expectedResult)
+        [TestCase(1500, 3000, 0.25, 0.5, 0.3, 0.6, "01/01/2018", 2015.55)]
+        public void EnergySaver_should_calculate_correct_tariff(int gasUsage, int electricitUsage, decimal initialGasRate, decimal finalGasRate, decimal initialElectricityRate, decimal finalElectricityRate, DateTime expirationDate, decimal expectedResult)
         {
             const int daysPerYear = 365;
             //arrange
-            var daysBeforeExpiration = (int)(expirationDate - DateTime.Today).TotalDays;
+            var daysBeforeExpiration = (int)(expirationDate - DateTime.Today).TotalDays + 24;
             var daysAfterExpiration = 365 - daysBeforeExpiration;
 
-            var initialGasCost = daysBeforeExpiration / (float)daysPerYear * gasUsage * initialGasRate;
-            var initialElectricityCost = daysBeforeExpiration / (float)daysPerYear * electricitUsage * initialElectricityRate;
+            var initialGasCost = Divide(daysBeforeExpiration, daysPerYear) * gasUsage * initialGasRate;
+            var initialElectricityCost = Divide(daysBeforeExpiration, daysPerYear) * electricitUsage * initialElectricityRate;
 
-            var finalGasCost = daysAfterExpiration / (float)daysPerYear * gasUsage * finalGasRate;
-            var finalElectricityCost = daysAfterExpiration / (float)daysPerYear * electricitUsage * finalElectricityRate;
+            var finalGasCost = Divide(daysAfterExpiration, daysPerYear) * gasUsage * finalGasRate;
+            var finalElectricityCost = Divide(daysAfterExpiration, daysPerYear) * electricitUsage * finalElectricityRate;
 
             //act
-            var annualCost = initialGasCost + finalGasCost + initialElectricityCost + finalElectricityCost;
+            var annualCost = Math.Round(initialGasCost + finalGasCost + initialElectricityCost + finalElectricityCost, 2);
 
             //assert
             Assert.That(annualCost, Is.EqualTo(expectedResult));

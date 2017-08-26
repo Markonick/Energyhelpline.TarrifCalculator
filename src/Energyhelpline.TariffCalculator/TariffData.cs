@@ -8,6 +8,6 @@ namespace Energyhelpline.TariffCalculator
         public decimal? FinalGasRate { get; set; }
         public decimal InitialElectricityRate { get; set; }
         public decimal? FinalElectricityRate { get; set; }
-        public DateTime? ExpirationDate { get; set; }
+        public string ExpirationDate { get; set; }
     }
 }

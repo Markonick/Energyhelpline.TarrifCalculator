@@ -15,8 +15,13 @@ namespace Energyhelpline.TariffCalculator
         {
             const int daysPerYear = 365;
 
-            int? daysBeforeExpiration = (int)(_tariffData.ExpirationDate - DateTime.Today).TotalDays ?? 0;
-            var daysAfterExpiration = 365 - daysBeforeExpiration;
+            var expirationDate = _tariffData.ExpirationDate;
+
+            if (expirationDate != null)
+            {
+                var daysBeforeExpiration = (int)(expirationDate - DateTime.Today).TotalDays;
+                var daysAfterExpiration = 365 - daysBeforeExpiration;
+            }
 
             var initialGasCost = decimal.Divide(daysBeforeExpiration, daysPerYear) * gasUsage * _tariffData.InitialGasRate;
             var initialElectricityCost = decimal.Divide(daysBeforeExpiration, daysPerYear) * electricitUsage * _tariffData.InitialElectricityRate;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Energyhelpline.TariffCalculator
+﻿namespace Energyhelpline.TariffCalculator.Models
 {
     public class TariffData
     {

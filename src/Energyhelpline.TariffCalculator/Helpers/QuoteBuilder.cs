@@ -1,4 +1,5 @@
 ﻿using System;
+using Energyhelpline.TariffCalculator.Models;
 
 namespace Energyhelpline.TariffCalculator.Helpers
 {

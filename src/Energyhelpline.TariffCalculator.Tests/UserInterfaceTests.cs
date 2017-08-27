@@ -1,5 +1,7 @@
 ﻿using System;
 using Energyhelpline.TariffCalculator.Helpers;
+using Energyhelpline.TariffCalculator.Services;
+using Energyhelpline.TariffCalculator.UI;
 using Moq;
 using NUnit.Framework;
 

@@ -1,4 +1,6 @@
-﻿namespace Energyhelpline.TariffCalculator.Helpers
+﻿using Energyhelpline.TariffCalculator.Models;
+
+namespace Energyhelpline.TariffCalculator.Helpers
 {
     public static class EmailConfigBuilder
     {

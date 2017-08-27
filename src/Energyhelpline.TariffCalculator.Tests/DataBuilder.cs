@@ -1,4 +1,6 @@
-﻿namespace Energyhelpline.TariffCalculator.Tests
+﻿using Energyhelpline.TariffCalculator.Models;
+
+namespace Energyhelpline.TariffCalculator.Tests
 {
     public static class DataBuilder
     {

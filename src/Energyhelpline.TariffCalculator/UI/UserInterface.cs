@@ -1,8 +1,9 @@
 ﻿using System.Text;
+using Energyhelpline.TariffCalculator.Services;
 
-namespace Energyhelpline.TariffCalculator
+namespace Energyhelpline.TariffCalculator.UI
 {
-    public class UserInterface
+    public class UserInterface : IUserInterface
     {
         private readonly IQuoteService _quoteService;
 

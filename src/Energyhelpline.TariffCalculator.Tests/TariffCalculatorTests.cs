@@ -1,4 +1,6 @@
 ﻿using System;
+using Energyhelpline.TariffCalculator.Models;
+using Energyhelpline.TariffCalculator.Strategies;
 using NUnit.Framework;
 
 namespace Energyhelpline.TariffCalculator.Tests

@@ -1,4 +1,5 @@
 ﻿using System;
+using Energyhelpline.TariffCalculator.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
 using NETCore.MailKit;

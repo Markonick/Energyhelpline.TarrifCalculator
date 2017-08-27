@@ -1,6 +1,7 @@
 ﻿using System;
+using Energyhelpline.TariffCalculator.Models;
 
-namespace Energyhelpline.TariffCalculator
+namespace Energyhelpline.TariffCalculator.Strategies
 {
     public class StandardCalculator : ICalculator
     {

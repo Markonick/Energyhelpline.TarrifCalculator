@@ -8,10 +8,10 @@ namespace Energyhelpline.TariffCalculator.Helpers
         {
             return new EmailConfig
             {
-                FromAddress = "dudubrain@dudu.com",
-                ToAddress = "dudubrain@dudu.com",
+                FromAddress = "nicolas.markos@gmail.com",
+                ToAddress = "nicolas.markos@gmail.com",
                 Username = "nicolas.markos",
-                Password = "TheElvis23",
+                Password = "password",
                 Subject = "Wassup?",
                 Message = "As I said, wassup?",
                 SmtpServer = "smtp.gmail.com",

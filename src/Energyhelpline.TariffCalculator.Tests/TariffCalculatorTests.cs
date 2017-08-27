@@ -16,10 +16,10 @@ namespace Energyhelpline.TariffCalculator.Tests
         {
         }
 
-        [TestCase(0, 4000, 2380.27)]
+        [TestCase(0, 4000, 2383.56)]
         [TestCase(0, 0, 0.0)]
-        [TestCase(2000, 4000, 3372.05)]
-        [TestCase(1500, 3000, 2529.04)]
+        [TestCase(2000, 4000, 3376.71)]
+        [TestCase(1500, 3000, 2532.53)]
         public void EnergySaver_should_calculate_correct_tariff(decimal gasUsage, decimal electricitUsage, decimal expectedResult)
         {
             _tariffData = DataBuilder.EnergySaverCreate();
@@ -30,10 +30,10 @@ namespace Energyhelpline.TariffCalculator.Tests
             Assert.That(annualCost, Is.EqualTo(expectedResult));
         }
 
-        [TestCase(0, 4000, 3254.79)]
+        [TestCase(0, 4000, 3262.47)]
         [TestCase(0, 0, 0.0)]
-        [TestCase(2000, 4000, 4619.18)]
-        [TestCase(1500, 3000, 3464.38)]
+        [TestCase(2000, 4000, 4629.86)]
+        [TestCase(1500, 3000, 3472.4)]
         public void DiscountEnergy_should_calculate_correct_tariff(decimal gasUsage, decimal electricitUsage, decimal expectedResult)
         {
             _tariffData = DataBuilder.DiscountEnergyCreate();
@@ -44,10 +44,10 @@ namespace Energyhelpline.TariffCalculator.Tests
             Assert.That(annualCost, Is.EqualTo(expectedResult));
         }
 
-        [TestCase(0, 4000, 429.59)]
+        [TestCase(0, 4000, 439.45)]
         [TestCase(0, 0, 0)]
-        [TestCase(2000, 4000, 935.34)]
-        [TestCase(1500, 3000, 701.51)]
+        [TestCase(2000, 4000, 947.12)]
+        [TestCase(1500, 3000, 710.34)]
         public void SaveOnline_should_calculate_correct_tariff(decimal gasUsage, decimal electricitUsage, decimal expectedResult)
         {
             _tariffData = DataBuilder.SaveOnline();

@@ -1,10 +1,11 @@
 ﻿using System;
 using MailKit.Net.Smtp;
 using MimeKit;
+using NETCore.MailKit;
 
 namespace Energyhelpline.TariffCalculator
 {
-    public class EmailSender
+    public class EmailSender : IEmailSender
     {
         private readonly EmailConfig _emailConfig;
 

@@ -1,4 +1,4 @@
-﻿namespace Energyhelpline.TariffCalculator
+﻿namespace Energyhelpline.TariffCalculator.Helpers
 {
     public interface IEmailSender
     {

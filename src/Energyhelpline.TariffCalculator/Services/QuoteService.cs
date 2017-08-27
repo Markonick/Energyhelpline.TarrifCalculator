@@ -10,9 +10,9 @@ namespace Energyhelpline.TariffCalculator.Services
 {
     public class QuoteService : IQuoteService
     {
-        private readonly QuoteRepository _quoteRepository;
+        private readonly IQuoteRepository _quoteRepository;
 
-        public QuoteService(QuoteRepository quoteRepository)
+        public QuoteService(IQuoteRepository quoteRepository)
         {
             _quoteRepository = quoteRepository;
         }

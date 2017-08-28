@@ -1,7 +1,10 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "define": [ "DEBUG" ],
+    "copyToOutput": {
+    }
   },
 
   "dependencies": {
@@ -21,7 +24,16 @@
 
   "frameworks": {
     "netcoreapp1.0": {
-      "imports": "dnxcore50"
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8",
+        "dotnet5.6"
+      ]
     }
+  },
+  "runtimes": {
+    "win7-x64": {},
+    "win81-x64": {},
+    "win10-x64": {}
   }
 }

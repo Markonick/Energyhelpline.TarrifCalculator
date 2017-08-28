@@ -31,10 +31,10 @@ namespace Energyhelpline.TariffCalculator.UI
             var quoteMessage = new StringBuilder();
 
             quoteMessage.AppendLine("Date: " + quoteData.DateTimeIssued);
-            quoteMessage.AppendLine("Gas usage: " + quoteData.GasUsage);
-            quoteMessage.AppendLine("Electricity usage: " + quoteData.ElectricityUsage);
+            quoteMessage.AppendLine("Gas usage: " + quoteData.GasUsage + " kWh");
+            quoteMessage.AppendLine("Electricity usage: " + quoteData.ElectricityUsage + " kWh");
             quoteMessage.AppendLine("Cheapest tariff: " + quoteData.CheapestTariff);
-            quoteMessage.AppendLine("Annual cost: " + quoteData.AnnualCost);
+            quoteMessage.AppendLine("Annual cost: £" + quoteData.AnnualCost);
 
             Output = quoteMessage.ToString();
         }

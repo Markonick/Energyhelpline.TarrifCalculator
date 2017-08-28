@@ -13,7 +13,6 @@ namespace Energyhelpline.TariffCalculator.Helpers
                 Username = "nicolas.markos",
                 Password = "password",
                 Subject = "Wassup?",
-                Message = "As I said, wassup?",
                 SmtpServer = "smtp.gmail.com",
                 Port = 587
             };

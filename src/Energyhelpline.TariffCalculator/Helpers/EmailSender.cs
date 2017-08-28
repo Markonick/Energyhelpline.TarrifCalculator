@@ -14,7 +14,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
             _emailConfig = emailConfig;
         }
 
-        public void SendEmail()
+        public void SendEmail(string emailMessage)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
 
                 message.Body = new TextPart("plain")
                 {
-                    Text = _emailConfig.Message
+                    Text = emailMessage
                 };
 
                 using (var client = new SmtpClient())
@@ -37,6 +37,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
                     client.Authenticate(_emailConfig.Username, _emailConfig.Password);
 
                     client.Send(message);
+
                     client.Disconnect(true);
                 }
             }

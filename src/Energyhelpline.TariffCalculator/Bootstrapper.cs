@@ -41,7 +41,6 @@ namespace Energyhelpline.TariffCalculator
                 Username = username,
                 Password = password,
                 Subject = subject,
-                Message = "Best Tariff Quote",
                 SmtpServer = smtpServer,
                 Port = port
             };

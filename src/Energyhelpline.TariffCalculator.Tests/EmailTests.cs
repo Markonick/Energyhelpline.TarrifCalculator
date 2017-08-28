@@ -26,7 +26,8 @@ namespace Energyhelpline.TariffCalculator.Tests
 
             try
             {
-                _emailSender.SendEmail();
+                const string message = "wassup?";
+                _emailSender.SendEmail(message);
             }
             catch (Exception ex)
             {

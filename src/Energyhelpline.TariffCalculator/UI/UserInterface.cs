@@ -43,7 +43,7 @@ namespace Energyhelpline.TariffCalculator.UI
         {
             Console.WriteLine(Output);
             Console.ReadLine();
-            _emailSender.SendEmail();
+            _emailSender.SendEmail(Output);
         }
     }
 }

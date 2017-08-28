@@ -1,5 +1,4 @@
-﻿using System;
-using Energyhelpline.TariffCalculator.Helpers;
+﻿using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Models;
 using Energyhelpline.TariffCalculator.Services;
 using Energyhelpline.TariffCalculator.UI;
@@ -18,23 +17,27 @@ namespace Energyhelpline.TariffCalculator.Tests
         private const string StartingDate = "30/9/2017";
 
         private UserInterface _ui;
-        private Mock<IQuoteService> _quoteService;
         private QuoteData _quoteData;
+        private Mock<IQuoteService> _quoteService;
+        private Mock<IEmailSender> _emailSender;
 
         [SetUp]
         public void SetUp()
         {
             _quoteData = QuoteBuilder.Build(GasUsage, ElectricityUsage, CheapestTariff, AnnualCost);
             _quoteService = new Mock<IQuoteService>();
-            _ui = new UserInterface(_quoteService.Object, GasUsage, ElectricityUsage, StartingDate);
+
+            _emailSender = new Mock<IEmailSender>();
+            _ui = new UserInterface(_quoteService.Object, _emailSender.Object, GasUsage, ElectricityUsage, StartingDate);
         }
 
         [Test]
         public void Should_produce_quote_message_in_the_expected_format()
         {
-            _quoteService.Setup(serv => serv.GetBestQuote(GasUsage, ElectricityUsage, StartingDate)).Returns(_quoteData);
+            _quoteService.Setup(serv => serv.GetBestQuote(GasUsage, ElectricityUsage, StartingDate)).Returns(_quoteData);       
+            _emailSender.Setup(snd => snd.SendEmail("somemessage"));
 
-            _ui.OutputQuote();
+            _ui.PopulateQuote();
             var quoteMessage = _ui.Output;
 
             var numberOfLines = quoteMessage.Split('\n').Length - 1;

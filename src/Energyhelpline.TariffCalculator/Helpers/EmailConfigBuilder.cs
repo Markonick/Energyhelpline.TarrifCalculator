@@ -4,16 +4,16 @@ namespace Energyhelpline.TariffCalculator.Helpers
 {
     public static class EmailConfigBuilder
     {
-        public static EmailConfig Build()
+        public static EmailConfigModel Build()
         {
-            return new EmailConfig
+            return new EmailConfigModel
             {
-                FromAddress = "nicolas.markos@gmail.com",
-                ToAddress = "nicolas.markos@gmail.com",
+                FromAddress = "nicolas.markos@gmail.com",//change to new source address
+                ToAddress = "nicolas.markos@gmail.com", //change to new destination address
                 Username = "nicolas.markos",
-                Password = "password",
+                Password = "password", // changed to a valid passw
                 Subject = "Wassup?",
-                SmtpServer = "smtp.gmail.com",
+                SmtpServer = "smtp.gmail.com", // smtp server
                 Port = 587
             };
         }

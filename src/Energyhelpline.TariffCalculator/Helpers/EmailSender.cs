@@ -7,11 +7,11 @@ namespace Energyhelpline.TariffCalculator.Helpers
 {
     public class EmailSender : IEmailSender
     {
-        private readonly EmailConfig _emailConfig;
+        private readonly EmailConfigModel _emailConfigModel;
 
-        public EmailSender(EmailConfig emailConfig)
+        public EmailSender(EmailConfigModel emailConfigModel)
         {
-            _emailConfig = emailConfig;
+            _emailConfigModel = emailConfigModel;
         }
 
         public void SendEmail(string emailMessage)
@@ -19,9 +19,9 @@ namespace Energyhelpline.TariffCalculator.Helpers
             try
             {
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(_emailConfig.Username, _emailConfig.FromAddress));
-                message.To.Add(new MailboxAddress(_emailConfig.Username, _emailConfig.ToAddress));
-                message.Subject = _emailConfig.Subject;
+                message.From.Add(new MailboxAddress(_emailConfigModel.Username, _emailConfigModel.FromAddress));
+                message.To.Add(new MailboxAddress(_emailConfigModel.Username, _emailConfigModel.ToAddress));
+                message.Subject = _emailConfigModel.Subject;
 
                 message.Body = new TextPart("plain")
                 {
@@ -30,11 +30,11 @@ namespace Energyhelpline.TariffCalculator.Helpers
 
                 using (var client = new SmtpClient())
                 {
-                    client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, false);
+                    client.Connect(_emailConfigModel.SmtpServer, _emailConfigModel.Port, false);
 
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                    client.Authenticate(_emailConfig.Username, _emailConfig.Password);
+                    client.Authenticate(_emailConfigModel.Username, _emailConfigModel.Password);
 
                     client.Send(message);
 

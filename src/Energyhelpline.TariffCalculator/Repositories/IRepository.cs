@@ -5,6 +5,6 @@ namespace Energyhelpline.TariffCalculator.Repositories
 {
     public interface IRepository
     {
-        IList<TariffData> GetQuotes();
+        IList<TariffDataModel> GetQuotes();
     }
 }

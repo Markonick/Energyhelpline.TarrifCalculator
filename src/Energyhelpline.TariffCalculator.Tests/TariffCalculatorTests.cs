@@ -9,7 +9,7 @@ namespace Energyhelpline.TariffCalculator.Tests
     public class TariffCalculatorTests
     {
         private ICalculator _calculator;
-        private TariffData _tariffData;
+        private TariffDataModel _tariffDataModel;
 
         [SetUp]
         public void SetUp()
@@ -22,8 +22,8 @@ namespace Energyhelpline.TariffCalculator.Tests
         [TestCase(2000, 4000, "30/09/2017", 2971.51)]
         public void EnergySaver_should_calculate_correct_tariff(int gasUsage, int electricitUsage, string startDate, decimal expectedResult)
         {
-            _tariffData = DataBuilder.EnergySaverCreate();
-            _calculator = new EnergySaverCalculator(_tariffData);
+            _tariffDataModel = DataBuilder.EnergySaverCreate();
+            _calculator = new EnergySaverCalculator(_tariffDataModel);
 
             var annualCost = _calculator.GetFinalCost(gasUsage, electricitUsage, startDate);
             
@@ -36,8 +36,8 @@ namespace Energyhelpline.TariffCalculator.Tests
         [TestCase(2000, 4000, "30/09/2017", 4116.99)]
         public void DiscountEnergy_should_calculate_correct_tariff(int gasUsage, int electricitUsage, string startDate, decimal expectedResult)
         {
-            _tariffData = DataBuilder.DiscountEnergyCreate();
-            _calculator = new EnergySaverCalculator(_tariffData);
+            _tariffDataModel = DataBuilder.DiscountEnergyCreate();
+            _calculator = new EnergySaverCalculator(_tariffDataModel);
 
             var annualCost = _calculator.GetFinalCost(gasUsage, electricitUsage, startDate);
 
@@ -50,8 +50,8 @@ namespace Energyhelpline.TariffCalculator.Tests
         [TestCase(2000, 4000, "30/09/2017", 4116.16)]
         public void SaveOnline_should_calculate_correct_tariff(int gasUsage, int electricitUsage, string startDate, decimal expectedResult)
         {
-            _tariffData = DataBuilder.SaveOnline();
-            _calculator = new EnergySaverCalculator(_tariffData);
+            _tariffDataModel = DataBuilder.SaveOnline();
+            _calculator = new EnergySaverCalculator(_tariffDataModel);
 
             var annualCost = _calculator.GetFinalCost(gasUsage, electricitUsage, startDate);
 
@@ -64,8 +64,8 @@ namespace Energyhelpline.TariffCalculator.Tests
         [TestCase(2000, 4000, "30/09/2017", 900)]
         public void Standard_should_calculate_correct_tariff(int gasUsage, int electricitUsage, string startDate, decimal expectedResult)
         {
-            _tariffData = DataBuilder.SaveOnline();
-            _calculator = new StandardCalculator(_tariffData);
+            _tariffDataModel = DataBuilder.SaveOnline();
+            _calculator = new StandardCalculator(_tariffDataModel);
 
             var annualCost = _calculator.GetFinalCost(gasUsage, electricitUsage, startDate);
 

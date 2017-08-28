@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Models;
@@ -6,6 +7,8 @@ using Energyhelpline.TariffCalculator.Repositories;
 using Energyhelpline.TariffCalculator.Services;
 using Energyhelpline.TariffCalculator.Strategies;
 using Energyhelpline.TariffCalculator.UI;
+using Energyhelpline.TariffCalculator.Validation;
+using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,12 +32,9 @@ namespace Energyhelpline.TariffCalculator
             var port = emailSettings.GetValue<int>("Port");
 
             var quoteSettings = configuration.GetSection("quoteSettings");
-            var gasUsage = quoteSettings.GetValue<int>("GasUsage");
-            var electricityUsage = quoteSettings.GetValue<int>("ElectricityUsage");
-            var startingDate = quoteSettings.GetValue<string>("StartingDate");
             var fileName = quoteSettings.GetValue<string>("FileName");
 
-            var emailConfig = new EmailConfig
+            var emailConfig = new EmailConfigModel
             {
                 FromAddress = fromAddress,
                 ToAddress = toAddress,
@@ -51,7 +51,8 @@ namespace Energyhelpline.TariffCalculator
             service.AddSingleton<IRepository, CsvQuoteRepository>(x => new CsvQuoteRepository(new CsvFileReader(), fileName));
             service.AddSingleton<IStrategyResolver, StrategyResolver>(x => new StrategyResolver());
             service.AddSingleton<IQuoteService, QuoteService>(x => new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()));
-            service.AddSingleton<IUserInterface, UserInterface>(x => new UserInterface(new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()), new EmailSender(emailConfig), gasUsage, electricityUsage, startingDate));
+            service.AddSingleton<IInputValidator, InputValidator>(x => new InputValidator(new List<AbstractValidator<InputModel>>()));
+            service.AddSingleton<IUserInterface, UserInterface>(x => new UserInterface(new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()), new EmailSender(emailConfig), new InputValidator(new List<AbstractValidator<InputModel>>())));
 
             service.AddSingleton<IEmailSender, EmailSender>(x => new EmailSender(emailConfig));
 

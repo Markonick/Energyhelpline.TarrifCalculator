@@ -5,9 +5,9 @@ namespace Energyhelpline.TariffCalculator.Helpers
 {
     public static class QuoteBuilder
     {
-        public static QuoteData Build(int gasUsage, int electricityUsage, string cheapestTariff, decimal annualCost)
+        public static QuoteDataModel Build(int gasUsage, int electricityUsage, string cheapestTariff, decimal annualCost)
         {
-            return new QuoteData
+            return new QuoteDataModel
             {
                 DateTimeIssued = DateTime.Now,
                 GasUsage = gasUsage,

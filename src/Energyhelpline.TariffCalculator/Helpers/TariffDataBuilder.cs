@@ -5,11 +5,11 @@ namespace Energyhelpline.TariffCalculator.Helpers
 {
     public static class TariffDataBuilder
     {
-        public static IList<TariffData> Build(string date1, string date3, string date4, string date6)
+        public static IList<TariffDataModel> Build(string date1, string date3, string date4, string date6)
         {
-            IList<TariffData> listOfQuotes = new List<TariffData>()
+            IList<TariffDataModel> listOfQuotes = new List<TariffDataModel>()
             {
-                new TariffData
+                new TariffDataModel
                 {
                     Name = "Name1",
                     InitialGasRate = 0.1M,
@@ -18,7 +18,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
                     FinalElectricityRate = 0.25M,
                     ExpirationDate = date1
                 },
-                new TariffData
+                new TariffDataModel
                 {
                     Name = "Name2",
                     InitialGasRate = 0.11M,
@@ -27,7 +27,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
                     FinalElectricityRate = null,
                     ExpirationDate = "None",
                 },
-                new TariffData
+                new TariffDataModel
                 {
                     Name = "Name3",
                     InitialGasRate = 0.4M,
@@ -36,7 +36,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
                     FinalElectricityRate = 0.22M,
                     ExpirationDate = date3
                 },
-                new TariffData
+                new TariffDataModel
                 {
                     Name = "Name4",
                     InitialGasRate = 0.15M,
@@ -45,7 +45,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
                     FinalElectricityRate = 0.25M,
                     ExpirationDate = date4
                 },
-                new TariffData
+                new TariffDataModel
                 {
                     Name = "Name5",
                     InitialGasRate = 0.23M,
@@ -54,7 +54,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
                     FinalElectricityRate = null,
                     ExpirationDate = "None",
                 },
-                new TariffData
+                new TariffDataModel
                 {
                     Name = "Name6",
                     InitialGasRate = 0.11M,

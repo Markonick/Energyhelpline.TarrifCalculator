@@ -5,11 +5,11 @@ namespace Energyhelpline.TariffCalculator.Strategies
 {
     public class EnergySaverCalculator : ICalculator
     {
-        private readonly TariffData _tariffData;
+        private readonly TariffDataModel _tariffDataModel;
 
-        public EnergySaverCalculator(TariffData tariffData)
+        public EnergySaverCalculator(TariffDataModel tariffDataModel)
         {
-            _tariffData = tariffData;
+            _tariffDataModel = tariffDataModel;
         }
 
         public decimal GetFinalCost(int gasUsage, int electricitUsage, string startingDate)
@@ -18,7 +18,7 @@ namespace Energyhelpline.TariffCalculator.Strategies
             {
                 const int daysPerYear = 365;
                 var fromDate = DateTime.ParseExact(startingDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture); ;
-                var expirationDate = DateTime.ParseExact(_tariffData.ExpirationDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                var expirationDate = DateTime.ParseExact(_tariffDataModel.ExpirationDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
                 
                 var daysBeforeExpiration = (int) (expirationDate - fromDate).TotalDays;
 
@@ -27,11 +27,11 @@ namespace Energyhelpline.TariffCalculator.Strategies
                 var daysBeforeFraction = decimal.Divide(daysBeforeExpiration, daysPerYear);
                 var daysAfterFraction = decimal.Divide(daysAfterExpiration, daysPerYear);
 
-                var initialGasCost = daysBeforeFraction * gasUsage * _tariffData.InitialGasRate;
-                var initialElectricityCost = daysBeforeFraction * electricitUsage * _tariffData.InitialElectricityRate;
+                var initialGasCost = daysBeforeFraction * gasUsage * _tariffDataModel.InitialGasRate;
+                var initialElectricityCost = daysBeforeFraction * electricitUsage * _tariffDataModel.InitialElectricityRate;
 
-                var finalGasCost = daysAfterFraction * gasUsage * _tariffData.FinalGasRate;
-                var finalElectricityCost = daysAfterFraction * electricitUsage * _tariffData.FinalElectricityRate;
+                var finalGasCost = daysAfterFraction * gasUsage * _tariffDataModel.FinalGasRate;
+                var finalElectricityCost = daysAfterFraction * electricitUsage * _tariffDataModel.FinalElectricityRate;
 
                 var total = Math.Round(initialGasCost + finalGasCost.Value + initialElectricityCost + finalElectricityCost.Value, 2);
 

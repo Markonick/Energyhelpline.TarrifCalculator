@@ -1,6 +1,6 @@
 ﻿namespace Energyhelpline.TariffCalculator.Models
 {
-    public class EmailConfig
+    public class EmailConfigModel
     {
         public string FromAddress { get; set; }
         public string ToAddress { get; set; }

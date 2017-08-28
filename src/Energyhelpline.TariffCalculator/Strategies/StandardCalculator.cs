@@ -5,17 +5,17 @@ namespace Energyhelpline.TariffCalculator.Strategies
 {
     public class StandardCalculator : ICalculator
     {
-        private readonly TariffData _tariffData;
+        private readonly TariffDataModel _tariffDataModel;
 
-        public StandardCalculator(TariffData tariffData)
+        public StandardCalculator(TariffDataModel tariffDataModel)
         {
-            _tariffData = tariffData;
+            _tariffDataModel = tariffDataModel;
         }
 
         public decimal GetFinalCost(int gasUsage, int electricitUsage, string startingDate)
         {
-            var initialGasCost = gasUsage * _tariffData.InitialGasRate;
-            var initialElectricityCost = electricitUsage * _tariffData.InitialElectricityRate;
+            var initialGasCost = gasUsage * _tariffDataModel.InitialGasRate;
+            var initialElectricityCost = electricitUsage * _tariffDataModel.InitialElectricityRate;
             
             var finalCost = Math.Round(initialGasCost + initialElectricityCost, 2);
 

@@ -15,7 +15,7 @@ namespace Energyhelpline.TariffCalculator.Repositories
             _fileName = fileName;
         }
 
-        public IList<TariffData> GetQuotes()
+        public IList<TariffDataModel> GetQuotes()
         {
             return _reader.ReadQuotesFromCsv(_fileName);
         }

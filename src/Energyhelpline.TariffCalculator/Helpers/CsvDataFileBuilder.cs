@@ -7,7 +7,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
 {
     public static class CsvDataFileBuilder
     {
-        public static IList<TariffData> Build(string fileName)
+        public static IList<TariffDataModel> Build(string fileName)
         {
             const string date1 = "15/10/2017";
             const string date3 = "01/11/2017";

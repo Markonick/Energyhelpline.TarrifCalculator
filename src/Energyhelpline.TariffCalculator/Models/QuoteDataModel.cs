@@ -2,7 +2,7 @@
 
 namespace Energyhelpline.TariffCalculator.Models
 {
-    public class QuoteData
+    public class QuoteDataModel
     {
         public string CheapestTariff { get; set; }
         public DateTime DateTimeIssued { get; set; }

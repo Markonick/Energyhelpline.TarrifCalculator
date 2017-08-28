@@ -9,16 +9,16 @@ namespace Energyhelpline.TariffCalculator.Strategies
         {
         }
 
-        public ICalculator GetStrategy(TariffStrategyEnum tariffStrategy, TariffData tariffData)
+        public ICalculator GetStrategy(TariffStrategyEnum tariffStrategy, TariffDataModel tariffDataModel)
         {
             switch (tariffStrategy)
             {
                 case TariffStrategyEnum.EnergySaver:
                 case TariffStrategyEnum.DiscountEnergy:
                 case TariffStrategyEnum.SaveOnline:
-                    return new EnergySaverCalculator(tariffData);
+                    return new EnergySaverCalculator(tariffDataModel);
                 case TariffStrategyEnum.Standard:
-                    return new StandardCalculator(tariffData);
+                    return new StandardCalculator(tariffDataModel);
                 default:
                     throw new Exception();
             }

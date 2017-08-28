@@ -18,10 +18,10 @@ namespace Energyhelpline.TariffCalculator.Services
             _strategyResolver = strategyResolver;
         }
 
-        public QuoteData GetBestQuote(int gasUsage, int electricityUsage, string startingDate)
+        public QuoteDataModel GetBestQuote(int gasUsage, int electricityUsage, string startingDate)
         {
             var quotes = _quoteRepository.GetQuotes();
-            var quoteList = new List<QuoteData>();
+            var quoteList = new List<QuoteDataModel>();
 
             foreach (var quote in quotes)
             {
@@ -36,9 +36,9 @@ namespace Energyhelpline.TariffCalculator.Services
             return orderedList.FirstOrDefault();
         }
 
-        private static QuoteData Mapper(TariffData quote, int gasUsage, int electricityUsage, decimal cost)
+        private static QuoteDataModel Mapper(TariffDataModel quote, int gasUsage, int electricityUsage, decimal cost)
         {
-            return new QuoteData
+            return new QuoteDataModel
             {
                 CheapestTariff = quote.Name,
                 DateTimeIssued = DateTime.Now,

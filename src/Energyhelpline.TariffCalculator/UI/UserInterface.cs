@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Text;
 using Energyhelpline.TariffCalculator.Helpers;
+using Energyhelpline.TariffCalculator.Models;
 using Energyhelpline.TariffCalculator.Services;
+using Energyhelpline.TariffCalculator.Validation;
 
 namespace Energyhelpline.TariffCalculator.UI
 {
@@ -9,24 +11,20 @@ namespace Energyhelpline.TariffCalculator.UI
     {
         private readonly IQuoteService _quoteService;
         private readonly IEmailSender _emailSender;
-        private readonly int _gasUsage;
-        private readonly int _electricityUsage;
-        private readonly string _startingDate;
+        private readonly IInputValidator _inputValidator;
 
         public string Output { get; set; }
 
-        public UserInterface(IQuoteService quoteService, IEmailSender emailSender, int gasUsage, int electricityUsage, string startingDate)
+        public UserInterface(IQuoteService quoteService, IEmailSender emailSender, IInputValidator inputValidator)
         {
             _quoteService = quoteService;
             _emailSender = emailSender;
-            _gasUsage = gasUsage;
-            _electricityUsage = electricityUsage;
-            _startingDate = startingDate;
+            _inputValidator = inputValidator;
         }
 
-        public void PopulateQuote()
+        public void PopulateQuote(int gasUsage, int electricityUsage, string startingDate)
         {
-            var quoteData = _quoteService.GetBestQuote(_gasUsage, _electricityUsage, _startingDate);
+            var quoteData = _quoteService.GetBestQuote(gasUsage, electricityUsage, startingDate);
 
             var quoteMessage = new StringBuilder();
 
@@ -44,6 +42,11 @@ namespace Energyhelpline.TariffCalculator.UI
             Console.WriteLine(Output);
             Console.ReadLine();
             _emailSender.SendEmail(Output);
+        }
+
+        public void ValidateInput(InputModel input)
+        {
+            _inputValidator.GetResult(input);
         }
     }
 }

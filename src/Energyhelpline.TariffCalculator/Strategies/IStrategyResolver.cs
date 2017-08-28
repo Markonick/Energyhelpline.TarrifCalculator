@@ -4,7 +4,7 @@ namespace Energyhelpline.TariffCalculator.Strategies
 {
     public interface IStrategyResolver
     {
-        ICalculator GetStrategy(TariffStrategyEnum tariffStrategy, TariffData tariffData);
+        ICalculator GetStrategy(TariffStrategyEnum tariffStrategy, TariffDataModel tariffDataModel);
         TariffStrategyEnum GetEnumFromStrategy(string name);
     }
 }

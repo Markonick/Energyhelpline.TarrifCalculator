@@ -4,9 +4,9 @@ namespace Energyhelpline.TariffCalculator.Helpers
 {
     public static class DataBuilder
     {
-        public static TariffData EnergySaverCreate()
+        public static TariffDataModel EnergySaverCreate()
         {
-            return new TariffData
+            return new TariffDataModel
             {
                 InitialGasRate = 0.25M,
                 FinalGasRate = 0.50M,
@@ -16,9 +16,9 @@ namespace Energyhelpline.TariffCalculator.Helpers
             };
         }
 
-        public static TariffData DiscountEnergyCreate()
+        public static TariffDataModel DiscountEnergyCreate()
         {
-            return new TariffData
+            return new TariffDataModel
             {
                 InitialGasRate = 0.20M,
                 FinalGasRate = 0.75M,
@@ -28,9 +28,9 @@ namespace Energyhelpline.TariffCalculator.Helpers
             };
         }
 
-        public static TariffData SaveOnline()
+        public static TariffDataModel SaveOnline()
         {
-            return new TariffData
+            return new TariffDataModel
             {
                 InitialGasRate = 0.25M,
                 FinalGasRate = 0.60M,
@@ -40,9 +40,9 @@ namespace Energyhelpline.TariffCalculator.Helpers
             };
         }
 
-        public static TariffData Standard()
+        public static TariffDataModel Standard()
         {
-            return new TariffData
+            return new TariffDataModel
             {
                 InitialGasRate = 0.25M,
                 FinalGasRate = null,

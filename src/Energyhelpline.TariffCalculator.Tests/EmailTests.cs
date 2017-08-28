@@ -9,13 +9,13 @@ namespace Energyhelpline.TariffCalculator.Tests
     public class EmailTests
     {
         private EmailSender _emailSender;
-        private EmailConfig _config;
+        private EmailConfigModel _configModel;
 
         [SetUp]
         public void SetUp()
         {
-            _config = EmailConfigBuilder.Build();
-            _emailSender = new EmailSender(_config);
+            _configModel = EmailConfigBuilder.Build();
+            _emailSender = new EmailSender(_configModel);
         }
 
         [Test]

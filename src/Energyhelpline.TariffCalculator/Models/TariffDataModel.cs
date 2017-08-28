@@ -1,6 +1,6 @@
 ﻿namespace Energyhelpline.TariffCalculator.Models
 {
-    public class TariffData
+    public class TariffDataModel
     {
         public string Name { get; set; }
         public decimal InitialGasRate { get; set; }

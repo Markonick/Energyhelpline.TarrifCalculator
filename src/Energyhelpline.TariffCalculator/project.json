@@ -4,7 +4,11 @@
     "emitEntryPoint": true,
     "define": [ "DEBUG" ],
     "copyToOutput": {
+      "publishOptions": [ "appsettings.json" ]
     }
+  },
+  "publishOptions": { 
+    "include": [ "appsettings.json"]
   },
 
   "dependencies": {
@@ -16,7 +20,6 @@
     "Microsoft.IdentityModel.Protocols": "2.0.0",
     "FluentValidation": "7.0.1",
     "Microsoft.NETCore.App": {
-      "type": "platform",
       "version": "1.0.0"
     },
     "NETCore.MailKit": "1.0.0"

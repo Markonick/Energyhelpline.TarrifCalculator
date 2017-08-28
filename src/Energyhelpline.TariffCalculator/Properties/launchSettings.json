@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Energyhelpline.TariffCalculator": {
+      "commandName": "Project",
+      "commandLineArgs": "1000 2000"
+    }
+  }
+}

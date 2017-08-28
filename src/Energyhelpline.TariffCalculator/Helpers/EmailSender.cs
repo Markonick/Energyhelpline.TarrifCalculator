@@ -2,7 +2,6 @@
 using Energyhelpline.TariffCalculator.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
-using NETCore.MailKit;
 
 namespace Energyhelpline.TariffCalculator.Helpers
 {

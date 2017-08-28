@@ -5,16 +5,16 @@
   },
 
   "dependencies": {
+    "CsvHelper": "2.16.3", 
+    "Microsoft.Extensions.Configuration.Binder": "1.0.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0",
     "Microsoft.NETCore.App": {
       "type": "platform",
-      "version": "1.0.1"
+      "version": "1.0.0"
     },
-    "CsvHelper": "2.16.3",
-    "NETCore.MailKit": "1.0.0",
-    "Microsoft.Extensions.DependencyInjection": "1.0.0",
-    "Microsoft.Extensions.Configuration.Binder": "1.1.0",
-    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
-    "microsoft.extensions.configuration.json": "1.1.0"
+    "NETCore.MailKit": "1.0.0"
   },
 
   "frameworks": {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Energyhelpline.TariffCalculator.Models;
+﻿using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Repositories;
 using Energyhelpline.TariffCalculator.Services;
+using Energyhelpline.TariffCalculator.Strategies;
 using Moq;
 using NUnit.Framework;
 
@@ -14,30 +11,34 @@ namespace Energyhelpline.TariffCalculator.Tests
     public class QuoteServiceTests
     {
         private QuoteService _quoteService;
-        private Mock<IQuoteRepository> _repository;
+        private Mock<IRepository> _repository;
+        private Mock<IStrategyResolver> _strategyResolver;
+        private const string _filelName = "testFileName";
 
         [SetUp]
         public void SetUp()
         {
-            _repository = new Mock<IQuoteRepository>();
-            _quoteService = new QuoteService(_repository.Object);
+            _repository = new Mock<IRepository>(_filelName);
+            _strategyResolver = new Mock<IStrategyResolver>();
+            _quoteService = new QuoteService(_repository.Object, _strategyResolver.Object);
         }
 
-        [Test]
-        public void Should_choose_best_quote_amongs_list()
+        [TestCase(1500, 3000, "30/09/2017")]
+        [TestCase(2000, 4000, "30/09/2017")]
+        public void QuoteService_should_choose_best_quote_among_tariff_list_with_given_power_usages(int gasUsage, int electricityUsage, string startingDate)
         {
-            IList<TariffData> listOfQuotes = new List<TariffData>()
-            {
-                new TariffData { InitialGasRate = 0.1M, FinalGasRate = 0.2M, InitialElectricityRate = 0.15M, FinalElectricityRate = 0.25M, ExpirationDate = DateTime.Today.ToString("yyyy/M/D"), },
-                new TariffData { InitialGasRate = 0.11M, FinalGasRate = null, InitialElectricityRate = 0.15M, FinalElectricityRate = null, ExpirationDate = "None", },
-                new TariffData { InitialGasRate = 0.4M, FinalGasRate = 0.45M, InitialElectricityRate = 0.12M, FinalElectricityRate = 0.22M, ExpirationDate = DateTime.Today.ToString("yyyy/M/D"), },
-                new TariffData { InitialGasRate = 0.15M, FinalGasRate = 0.25M, InitialElectricityRate = 0.15M, FinalElectricityRate = 0.25M, ExpirationDate = DateTime.Today.ToString("yyyy/M/D"), },
-                new TariffData { InitialGasRate = 0.23M, FinalGasRate = null, InitialElectricityRate = 0.15M, FinalElectricityRate = null, ExpirationDate = "None", },
-                new TariffData { InitialGasRate = 0.11M, FinalGasRate = 0.21M, InitialElectricityRate = 0.19M, FinalElectricityRate = 0.25M, ExpirationDate = DateTime.Today.ToString("yyyy/M/D"), },
-            };
+            const string date1 = "15/10/2017";
+            const string date3 = "01/11/2017";
+            const string date4 = "05/12/2017";
+            const string date6 = "30/09/2017";
+
+            var listOfQuotes = TariffDataBuilder.Build(date1, date3, date4, date6);
 
             _repository.Setup(repo => repo.GetQuotes()).Returns(listOfQuotes);
-            var bestQuote = _quoteService.GetBestQuote();
+            //_strategyResolver.Setup(strategy => strategy.GetEnumFromStrategy("")).Returns(TariffStrategyEnum.EnergySaver);
+            //_strategyResolver.Setup(strategy => strategy.GetStrategy()).Returns(TariffStrategyEnum.EnergySaver);
+
+            var bestQuote = _quoteService.GetBestQuote(gasUsage, electricityUsage, startingDate);
 
             Assert.That(bestQuote, Is.EqualTo(2222));
         }

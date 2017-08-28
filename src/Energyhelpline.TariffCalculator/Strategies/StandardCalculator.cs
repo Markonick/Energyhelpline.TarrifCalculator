@@ -12,7 +12,7 @@ namespace Energyhelpline.TariffCalculator.Strategies
             _tariffData = tariffData;
         }
 
-        public decimal GetFinalCost(decimal gasUsage, decimal electricitUsage)
+        public decimal GetFinalCost(int gasUsage, int electricitUsage, string startingDate)
         {
             var initialGasCost = gasUsage * _tariffData.InitialGasRate;
             var initialElectricityCost = electricitUsage * _tariffData.InitialElectricityRate;

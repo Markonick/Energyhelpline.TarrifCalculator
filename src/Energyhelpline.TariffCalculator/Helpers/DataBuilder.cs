@@ -1,6 +1,6 @@
 ﻿using Energyhelpline.TariffCalculator.Models;
 
-namespace Energyhelpline.TariffCalculator.Tests
+namespace Energyhelpline.TariffCalculator.Helpers
 {
     public static class DataBuilder
     {
@@ -12,7 +12,7 @@ namespace Energyhelpline.TariffCalculator.Tests
                 FinalGasRate = 0.50M,
                 InitialElectricityRate = 0.30M,
                 FinalElectricityRate = 0.60M,
-                ExpirationDate = "2017/9/1"
+                ExpirationDate = "31/12/2017"
             };
         }
 
@@ -24,7 +24,7 @@ namespace Energyhelpline.TariffCalculator.Tests
                 FinalGasRate = 0.75M,
                 InitialElectricityRate = 0.20M,
                 FinalElectricityRate = 0.90M,
-                ExpirationDate = "2017/10/10"
+                ExpirationDate = "31/12/2017"
             };
         }
 
@@ -36,7 +36,7 @@ namespace Energyhelpline.TariffCalculator.Tests
                 FinalGasRate = 0.60M,
                 InitialElectricityRate = 0.10M,
                 FinalElectricityRate = 1.00M,
-                ExpirationDate = "2018/8/23"
+                ExpirationDate = "31/12/2017"
             };
         }
 

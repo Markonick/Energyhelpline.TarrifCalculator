@@ -1,4 +1,5 @@
-﻿using Energyhelpline.TariffCalculator.Helpers;
+﻿using System;
+using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Models;
 using NUnit.Framework;
 
@@ -20,7 +21,19 @@ namespace Energyhelpline.TariffCalculator.Tests
         [Test]
         public void Should_send_test_email_to_address()
         {
-            _emailSender.SendEmail();
+            const string noError = "No Error";
+            var error = noError;
+
+            try
+            {
+                _emailSender.SendEmail();
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+
+            Assert.That(error, Is.EqualTo(noError));
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     public class TariffData
     {
+        public string Name { get; set; }
         public decimal InitialGasRate { get; set; }
         public decimal? FinalGasRate { get; set; }
         public decimal InitialElectricityRate { get; set; }

@@ -2,6 +2,6 @@
 {
     public interface ICalculator
     {
-        decimal GetFinalCost(decimal gasUsage, decimal electricitUsage);
+        decimal GetFinalCost(int gasUsage, int electricitUsage, string startingDate);
     }
 }

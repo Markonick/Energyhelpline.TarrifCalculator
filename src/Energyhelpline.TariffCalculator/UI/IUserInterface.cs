@@ -2,6 +2,7 @@
 {
     public interface IUserInterface
     {
-        string OutputQuote();
+        void PopulateQuote();
+        void EmailQuote();
     }
 }

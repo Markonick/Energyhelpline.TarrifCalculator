@@ -112,29 +112,6 @@ namespace Energyhelpline.TariffCalculator.Tests
             Assert.That(result, Is.EqualTo("Date has to be in dd/MM/yyyy format"));
         }
 
-        [TestCase(1000, 1, "31-09-2017")]
-        public void DateValidator_should_assert_when_date_is_invalid(int gas, int electricity, string date)
-        {
-
-            var inputModel = new InputModel
-            {
-                GasUsage = gas,
-                ElectricityUsage = electricity,
-                StartingDate = date
-            };
-
-            var validators = new List<AbstractValidator<InputModel>>
-            {
-                new DateValidator()
-            };
-
-            _inputValidator = new InputValidator(validators);
-
-            var result = _inputValidator.GetResult(inputModel);
-
-            Assert.That(result, Is.EqualTo("Invalid date"));
-        }
-
         [TestCase(1000, 1, "")]
         public void DateValidator_should_assert_when_date_is_empty(int gas, int electricity, string date)
         {

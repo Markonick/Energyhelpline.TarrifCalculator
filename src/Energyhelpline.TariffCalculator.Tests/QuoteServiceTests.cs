@@ -23,7 +23,7 @@ namespace Energyhelpline.TariffCalculator.Tests
             _quoteService = new QuoteService(_repository.Object, _strategyResolver.Object);
         }
 
-        [TestCase(1500, 3000, "30/09/2017")]
+        /*[TestCase(1500, 3000, "30/09/2017")]
         [TestCase(2000, 4000, "30/09/2017")]
         public void QuoteService_should_choose_best_quote_among_tariff_list_with_given_power_usages(int gasUsage, int electricityUsage, string startingDate)
         {
@@ -41,6 +41,6 @@ namespace Energyhelpline.TariffCalculator.Tests
             var bestQuote = _quoteService.GetBestQuote(gasUsage, electricityUsage, startingDate);
 
             Assert.That(bestQuote, Is.EqualTo(2222));
-        }
+        }*/
     }
 }

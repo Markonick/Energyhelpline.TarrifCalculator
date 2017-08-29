@@ -1,12 +1,13 @@
 ﻿using System;
 using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Models;
+using Energyhelpline.TariffCalculator.Tests.Builders;
 using NUnit.Framework;
 
 namespace Energyhelpline.TariffCalculator.Tests
 {
     [TestFixture]
-    public class EmailTests
+    public class EmailSenderTests
     {
         private EmailSender _emailSender;
         private EmailConfigModel _configModel;

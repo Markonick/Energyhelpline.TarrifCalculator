@@ -1,0 +1,7 @@
+Tariff name,Gas initial unit rate (£/kWh),Gas final unit rate (£/kWh),Electricity initial unit rate (£/kWh),Electricity final unit rate (£/kWh),Initial rate expiration date (DD/MM/YYYY)
+Name1,0.1,0.2,0.15,0.25,15/10/2017
+Name2,0.11,,0.15,,None
+Name3,0.4,0.45,0.12,0.22,01/11/2017
+Name4,0.15,0.25,0.15,0.25,05/12/2017
+Name5,0.23,,0.15,,None
+Name6,0.11,0.21,0.19,0.25,30/09/2017

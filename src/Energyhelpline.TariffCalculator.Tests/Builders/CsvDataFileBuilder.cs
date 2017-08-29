@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using CsvHelper;
+using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Models;
 
-namespace Energyhelpline.TariffCalculator.Helpers
+namespace Energyhelpline.TariffCalculator.Tests.Builders
 {
     public static class CsvDataFileBuilder
     {

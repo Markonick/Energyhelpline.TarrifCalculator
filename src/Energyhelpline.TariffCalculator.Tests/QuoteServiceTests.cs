@@ -1,7 +1,7 @@
-﻿using Energyhelpline.TariffCalculator.Helpers;
-using Energyhelpline.TariffCalculator.Repositories;
+﻿using Energyhelpline.TariffCalculator.Repositories;
 using Energyhelpline.TariffCalculator.Services;
 using Energyhelpline.TariffCalculator.Strategies;
+using Energyhelpline.TariffCalculator.Tests.Builders;
 using Moq;
 using NUnit.Framework;
 
@@ -18,7 +18,7 @@ namespace Energyhelpline.TariffCalculator.Tests
         [SetUp]
         public void SetUp()
         {
-            _repository = new Mock<IRepository>(_filelName);
+            _repository = new Mock<IRepository>();
             _strategyResolver = new Mock<IStrategyResolver>();
             _quoteService = new QuoteService(_repository.Object, _strategyResolver.Object);
         }

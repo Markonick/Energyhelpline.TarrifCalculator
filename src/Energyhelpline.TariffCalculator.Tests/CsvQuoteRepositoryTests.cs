@@ -1,12 +1,13 @@
 ﻿using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Repositories;
+using Energyhelpline.TariffCalculator.Tests.Builders;
 using Moq;
 using NUnit.Framework;
 
 namespace Energyhelpline.TariffCalculator.Tests
 {
     [TestFixture]
-    public class RepositoryTests
+    public class CsvQuoteRepositoryTests
     {
         private readonly string _fileName = "testFileName";
         private Mock<ICsvFileReader> _csvReader;

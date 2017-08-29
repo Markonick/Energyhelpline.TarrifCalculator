@@ -1,6 +1,6 @@
 ﻿using Energyhelpline.TariffCalculator.Models;
 
-namespace Energyhelpline.TariffCalculator.Helpers
+namespace Energyhelpline.TariffCalculator.Tests.Builders
 {
     public interface IQuoteBuilder
     {

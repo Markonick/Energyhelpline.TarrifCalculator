@@ -45,9 +45,9 @@ namespace Energyhelpline.TariffCalculator.UI
             Console.ReadLine();
         }
 
-        public void ValidateInput(InputModel input)
+        public string ValidateInput(InputModel input)
         {
-            _inputValidator.GetResult(input);
+            return _inputValidator.GetResult(input);
         }
     }
 }

@@ -45,14 +45,19 @@ namespace Energyhelpline.TariffCalculator
                 Port = port
             };
 
-            //service.AddSingleton<AbstractValidator<CommandViewModel>, LoanRangeValidator>(x => new LoanRangeValidator(minimumLoan, maximumLoan));
-
+            var validators = new List<AbstractValidator<InputModel>>
+            {
+                new ValueValidator(),
+                new DateValidator()
+            };
+            
+            service.AddSingleton<IInputValidator, InputValidator>(x => new InputValidator(validators));
             service.AddSingleton<ICsvFileReader, CsvFileReader>(x => new CsvFileReader());
             service.AddSingleton<IRepository, CsvQuoteRepository>(x => new CsvQuoteRepository(new CsvFileReader(), fileName));
             service.AddSingleton<IStrategyResolver, StrategyResolver>(x => new StrategyResolver());
             service.AddSingleton<IQuoteService, QuoteService>(x => new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()));
             service.AddSingleton<IInputValidator, InputValidator>(x => new InputValidator(new List<AbstractValidator<InputModel>>()));
-            service.AddSingleton<IUserInterface, UserInterface>(x => new UserInterface(new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()), new EmailSender(emailConfig), new InputValidator(new List<AbstractValidator<InputModel>>())));
+            service.AddSingleton<IUserInterface, UserInterface>(x => new UserInterface(new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()), new EmailSender(emailConfig), new InputValidator(validators)));
 
             service.AddSingleton<IEmailSender, EmailSender>(x => new EmailSender(emailConfig));
 

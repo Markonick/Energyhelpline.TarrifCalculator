@@ -17,14 +17,21 @@ namespace Energyhelpline.TariffCalculator
                 var ui = serviceProvider.GetService<IUserInterface>();
                 var input = PrepareInput();
 
-                ui.ValidateInput(input);
+                var result = ui.ValidateInput(input);
+                if (result != "Passed input validations!")
+                {
+                    Console.WriteLine(result);
+                    Console.WriteLine("...please press key to exit...");
+                    Console.ReadLine();
+                }
+
                 ui.PopulateQuote(input.GasUsage, input.ElectricityUsage, input.StartingDate);
                 ui.EmailQuote();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-
+                Console.WriteLine("...please press key to exit...");
                 Console.ReadLine();
             }
         }

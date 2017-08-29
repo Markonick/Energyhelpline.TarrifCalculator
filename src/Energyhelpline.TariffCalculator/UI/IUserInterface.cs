@@ -6,6 +6,6 @@ namespace Energyhelpline.TariffCalculator.UI
     {
         void PopulateQuote(int gasUsage, int electricityUsage, string startingDate);
         void EmailQuote();
-        void ValidateInput(InputModel input);
+        string ValidateInput(InputModel input);
     }
 }

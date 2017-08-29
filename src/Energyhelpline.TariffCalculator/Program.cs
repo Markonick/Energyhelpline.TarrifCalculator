@@ -15,8 +15,8 @@ namespace Energyhelpline.TariffCalculator
             {
                 var serviceProvider = Bootstrapper.ConfigureServices();
                 var ui = serviceProvider.GetService<IUserInterface>();
-
                 var input = PrepareInput();
+
                 ui.ValidateInput(input);
                 ui.PopulateQuote(input.GasUsage, input.ElectricityUsage, input.StartingDate);
                 ui.EmailQuote();
@@ -33,7 +33,6 @@ namespace Energyhelpline.TariffCalculator
         {
             Console.OutputEncoding = Encoding.Unicode;
             var configuration = Bootstrapper.GetConfiguration();
-
             var quoteSettings = configuration.GetSection("quoteSettings");
 
             return new InputModel

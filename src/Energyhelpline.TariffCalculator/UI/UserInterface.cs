@@ -39,9 +39,10 @@ namespace Energyhelpline.TariffCalculator.UI
         
         public void EmailQuote()
         {
+            _emailSender.SendEmail(Output);
+
             Console.WriteLine(Output);
             Console.ReadLine();
-            _emailSender.SendEmail(Output);
         }
 
         public void ValidateInput(InputModel input)

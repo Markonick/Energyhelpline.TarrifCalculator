@@ -57,9 +57,9 @@ namespace Energyhelpline.TariffCalculator
             service.AddSingleton<IStrategyResolver, StrategyResolver>(x => new StrategyResolver());
             service.AddSingleton<IQuoteService, QuoteService>(x => new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()));
             service.AddSingleton<IInputValidator, InputValidator>(x => new InputValidator(new List<AbstractValidator<InputModel>>()));
-            service.AddSingleton<IUserInterface, UserInterface>(x => new UserInterface(new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()), new EmailSender(emailConfig), new InputValidator(validators)));
+            service.AddSingleton<IAppController, AppController>(x => new AppController(new QuoteService(new CsvQuoteRepository(new CsvFileReader(), fileName), new StrategyResolver()), new EmailService(emailConfig), new InputValidator(validators)));
 
-            service.AddSingleton<IEmailSender, EmailSender>(x => new EmailSender(emailConfig));
+            service.AddSingleton<IEmailService, EmailService>(x => new EmailService(emailConfig));
 
             var provider = service.BuildServiceProvider();
 

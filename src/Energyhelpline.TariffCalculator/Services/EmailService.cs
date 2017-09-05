@@ -1,20 +1,22 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
 
-namespace Energyhelpline.TariffCalculator.Helpers
+namespace Energyhelpline.TariffCalculator.Services
 {
-    public class EmailSender : IEmailSender
+    public class EmailService : IEmailService
     {
         private readonly EmailConfigModel _emailConfigModel;
 
-        public EmailSender(EmailConfigModel emailConfigModel)
+        public EmailService(EmailConfigModel emailConfigModel)
         {
             _emailConfigModel = emailConfigModel;
         }
 
-        public void SendEmail(string emailMessage)
+        public async Task SendEmail(string emailMessage)
         {
             try
             {
@@ -36,7 +38,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
 
                     client.Authenticate(_emailConfigModel.Username, _emailConfigModel.Password);
 
-                    client.Send(message);
+                    await client.SendAsync(message);
 
                     client.Disconnect(true);
                 }

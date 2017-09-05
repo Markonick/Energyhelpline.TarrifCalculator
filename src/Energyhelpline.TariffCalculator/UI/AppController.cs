@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Models;
 using Energyhelpline.TariffCalculator.Services;
@@ -7,22 +8,18 @@ using Energyhelpline.TariffCalculator.Validation;
 
 namespace Energyhelpline.TariffCalculator.UI
 {
-    public class UserInterface : IUserInterface
+    public class AppController : IAppController
     {
         private readonly IQuoteService _quoteService;
-        private readonly IEmailSender _emailSender;
-        private readonly IInputValidator _inputValidator;
-
-        public string Output { get; set; }
-
-        public UserInterface(IQuoteService quoteService, IEmailSender emailSender, IInputValidator inputValidator)
+        private readonly IEmailService _emailService;
+        
+        public AppController(IQuoteService quoteService, IEmailService emailService)
         {
             _quoteService = quoteService;
-            _emailSender = emailSender;
-            _inputValidator = inputValidator;
+            _emailService = emailService;
         }
 
-        public void PopulateQuote(int gasUsage, int electricityUsage, string startingDate)
+        public async void Run()
         {
             var quoteData = _quoteService.GetBestQuote(gasUsage, electricityUsage, startingDate);
 
@@ -33,21 +30,11 @@ namespace Energyhelpline.TariffCalculator.UI
             quoteMessage.AppendLine("Electricity usage: " + quoteData.ElectricityUsage + " kWh");
             quoteMessage.AppendLine("Cheapest tariff: " + quoteData.CheapestTariff);
             quoteMessage.AppendLine("Annual cost: £" + quoteData.AnnualCost);
+       
+            await _emailService.SendEmail(quoteMessage.ToString());
 
-            Output = quoteMessage.ToString();
-        }
-        
-        public void EmailQuote()
-        {
-            _emailSender.SendEmail(Output);
-
-            Console.WriteLine(Output);
+            Console.WriteLine(quoteMessage);
             Console.ReadLine();
-        }
-
-        public string ValidateInput(InputModel input)
-        {
-            return _inputValidator.GetResult(input);
         }
     }
 }

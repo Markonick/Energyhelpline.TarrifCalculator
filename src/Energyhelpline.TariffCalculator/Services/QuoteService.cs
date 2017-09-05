@@ -20,15 +20,16 @@ namespace Energyhelpline.TariffCalculator.Services
 
         public QuoteDataModel GetBestQuote(int gasUsage, int electricityUsage, string startingDate)
         {
-            var quotes = _quoteRepository.GetQuotes();
-            var quoteList = new List<QuoteDataModel>();
+            var tariffs = _quoteRepository.GetQuotes();
+            var tariff = new TariffDataModel();
+            var calculators = new List<ICalculator>
+            {
+                new EnergySaverCalculator(),
+            };
 
             foreach (var quote in quotes)
             {
-                var strategy = _strategyResolver.GetEnumFromStrategy(quote.Name);
-                var cost = _strategyResolver.GetStrategy(strategy, quote).GetFinalCost(gasUsage, electricityUsage, startingDate);
-
-                quoteList.Add(Mapper(quote, gasUsage, electricityUsage, cost));
+                if(quote.);
             }
 
             var orderedList = quoteList.OrderBy(x => x.AnnualCost);

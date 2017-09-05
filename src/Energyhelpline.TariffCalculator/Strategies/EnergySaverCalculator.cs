@@ -1,49 +1,50 @@
 ﻿using System;
-using Energyhelpline.TariffCalculator.Models;
 
 namespace Energyhelpline.TariffCalculator.Strategies
 {
     public class EnergySaverCalculator : ICalculator
     {
-        private readonly TariffDataModel _tariffDataModel;
+        private readonly int _gasUsage;
+        private readonly int _electricityUsage;
+        private readonly decimal _initialGasRate;
+        private readonly decimal _finalGasRate;
+        private readonly decimal _initialElectricityRate;
+        private readonly decimal _finalElectricityRate;
+        private readonly DateTime _startingDate;
+        private readonly DateTime _expirationDate;
+        private const int DaysPerYear = 365;
 
-        public EnergySaverCalculator(TariffDataModel tariffDataModel)
+        public EnergySaverCalculator(int gasUsage, int electricityUsage, decimal initialGasRate, decimal finalGasRate, decimal initialElectricityRate, decimal finalElectricityRate, DateTime startingDate, DateTime expirationDate)
         {
-            _tariffDataModel = tariffDataModel;
+            _gasUsage = gasUsage;
+            _electricityUsage = electricityUsage;
+            _initialGasRate = initialGasRate;
+            _finalGasRate = finalGasRate;
+            _initialElectricityRate = initialElectricityRate;
+            _finalElectricityRate = finalElectricityRate;
+            _startingDate = startingDate;
+            _expirationDate = expirationDate;
         }
 
-        public decimal GetFinalCost(int gasUsage, int electricitUsage, string startingDate)
+        public decimal GetTotalAnnualCost()
         {
-            try
-            {
-                const int daysPerYear = 365;
-                var fromDate = DateTime.ParseExact(startingDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture); ;
-                var expirationDate = DateTime.ParseExact(_tariffDataModel.ExpirationDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                
-                var daysBeforeExpiration = (int) (expirationDate - fromDate).TotalDays;
+            var annualGas = GetAnnualCost(_gasUsage, _initialGasRate, _finalGasRate);
+            var annualElectricity = GetAnnualCost(_electricityUsage, _initialElectricityRate, _finalElectricityRate);
 
-                var daysAfterExpiration = (daysPerYear - daysBeforeExpiration);
+            return Math.Round(annualGas + annualElectricity, 2);
+        }
 
-                var daysBeforeFraction = decimal.Divide(daysBeforeExpiration, daysPerYear);
-                var daysAfterFraction = decimal.Divide(daysAfterExpiration, daysPerYear);
+        private decimal GetAnnualCost(int usage, decimal initialRate, decimal finalRate)
+        {
+            var daysBeforeExpirationDate = (int)(_expirationDate - _startingDate).TotalDays;
+            var daysAfterExpirationDate = DaysPerYear - daysBeforeExpirationDate;
+            var normalisedDaysBeforeExpiration = decimal.Divide(daysBeforeExpirationDate, DaysPerYear);
+            var normalisedDaysAfterExpiration = decimal.Divide(daysAfterExpirationDate, DaysPerYear);
 
-                var initialGasCost = daysBeforeFraction * gasUsage * _tariffDataModel.InitialGasRate;
-                var initialElectricityCost = daysBeforeFraction * electricitUsage * _tariffDataModel.InitialElectricityRate;
+            var initialCost = normalisedDaysBeforeExpiration * usage * initialRate;
+            var finalCost = normalisedDaysAfterExpiration * usage * finalRate;
 
-                var finalGasCost = daysAfterFraction * gasUsage * _tariffDataModel.FinalGasRate;
-                var finalElectricityCost = daysAfterFraction * electricitUsage * _tariffDataModel.FinalElectricityRate;
-
-                var total = Math.Round(initialGasCost + finalGasCost.Value + initialElectricityCost + finalElectricityCost.Value, 2);
-
-                return total;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-
-                return 0;
-            }
-
+            return initialCost + finalCost;
         }
     }
 }

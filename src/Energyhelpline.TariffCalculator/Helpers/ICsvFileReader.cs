@@ -5,6 +5,6 @@ namespace Energyhelpline.TariffCalculator.Helpers
 {
     public interface ICsvFileReader
     {
-        IList<TariffDataModel> ReadQuotesFromCsv(string fileName);
+        IList<TariffDataModel> Read(string fileName);
     }
 }

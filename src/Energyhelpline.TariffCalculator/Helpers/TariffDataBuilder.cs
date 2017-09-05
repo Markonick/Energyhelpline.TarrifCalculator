@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Energyhelpline.TariffCalculator.Models;
 
-namespace Energyhelpline.TariffCalculator.Tests.Builders
+namespace Energyhelpline.TariffCalculator.Helpers
 {
     public static class TariffDataBuilder
     {

@@ -18,10 +18,10 @@ namespace Energyhelpline.TariffCalculator.Tests
         private const decimal AnnualCost = 3333;
         private const string StartingDate = "30/9/2017";
 
-        private UserInterface _ui;
+        private AppController _ui;
         private QuoteDataModel _quoteDataModel;
         private Mock<IQuoteService> _quoteService;
-        private Mock<IEmailSender> _emailSender;
+        private Mock<IEmailService> _emailSender;
         private Mock<IInputValidator> _validator;
 
         [SetUp]
@@ -29,9 +29,9 @@ namespace Energyhelpline.TariffCalculator.Tests
         {
             _quoteDataModel = QuoteBuilder.Build(GasUsage, ElectricityUsage, CheapestTariff, AnnualCost);
             _quoteService = new Mock<IQuoteService>();
-            _emailSender = new Mock<IEmailSender>();
+            _emailSender = new Mock<IEmailService>();
             _validator = new Mock<IInputValidator>();
-            _ui = new UserInterface(_quoteService.Object, _emailSender.Object, _validator.Object);
+            _ui = new AppController(_quoteService.Object, _emailSender.Object, _validator.Object);
         }
 
         [Test]

@@ -9,14 +9,14 @@ namespace Energyhelpline.TariffCalculator.Tests
     [TestFixture]
     public class EmailSenderTests
     {
-        private EmailSender _emailSender;
+        private EmailService _emailService;
         private EmailConfigModel _configModel;
 
         [SetUp]
         public void SetUp()
         {
             _configModel = EmailConfigBuilder.Build();
-            _emailSender = new EmailSender(_configModel);
+            _emailService = new EmailService(_configModel);
         }
 
         [Test]
@@ -28,7 +28,7 @@ namespace Energyhelpline.TariffCalculator.Tests
             try
             {
                 const string message = "wassup?";
-                _emailSender.SendEmail(message);
+                _emailService.SendEmail(message);
             }
             catch (Exception ex)
             {

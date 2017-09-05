@@ -6,7 +6,7 @@ namespace Energyhelpline.TariffCalculator.Helpers
 {
     public class CsvFileReader : ICsvFileReader
     {
-        public IList<TariffDataModel> ReadQuotesFromCsv(string fileName)
+        public IList<TariffDataModel> Read(string fileName)
         {
             var quotes = new List<TariffDataModel>();
             var path = Directory.GetCurrentDirectory();
@@ -49,16 +49,6 @@ namespace Energyhelpline.TariffCalculator.Helpers
 
                     tariffData.ExpirationDate = values[5];
                     quotes.Add(tariffData);
-                    /*quotes.Add(new TariffDataModel
-                    {
-
-                        Name = values[0],
-                        InitialGasRate = decimal.Parse(values[1]),
-                        FinalGasRate = decimal.Parse(values[2]),
-                        InitialElectricityRate = decimal.Parse(values[3]),
-                        FinalElectricityRate = decimal.Parse(values[4]),
-                        ExpirationDate = values[5]
-                    });*/
                 }
             }
 

@@ -14,7 +14,7 @@ namespace Energyhelpline.TariffCalculator
             try
             {
                 var serviceProvider = Bootstrapper.ConfigureServices();
-                var ui = serviceProvider.GetService<IUserInterface>();
+                var ui = serviceProvider.GetService<IAppController>();
                 var input = PrepareInput();
 
                 var result = ui.ValidateInput(input);

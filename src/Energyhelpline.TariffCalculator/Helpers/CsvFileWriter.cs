@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using CsvHelper;
-using Energyhelpline.TariffCalculator.Helpers;
 using Energyhelpline.TariffCalculator.Models;
 
-namespace Energyhelpline.TariffCalculator.Tests.Builders
+namespace Energyhelpline.TariffCalculator.Helpers
 {
-    public static class CsvDataFileBuilder
+    public class CsvFileWriter
     {
-        public static IList<TariffDataModel> Build(string fileName)
-        {
-            const string date1 = "15/10/2017";
-            const string date3 = "01/11/2017";
-            const string date4 = "05/12/2017";
-            const string date6 = "30/09/2017";
+        private readonly IList<TariffDataModel> _tariffDataModel;
 
-            var listOfQuotes = TariffDataBuilder.Build(date1, date3, date4, date6);
-            
+        public CsvFileWriter(IList<TariffDataModel> tariffDataModel)
+        {
+            _tariffDataModel = tariffDataModel;
+        }
+
+        public void Build(string fileName)
+        {
             var file = File.OpenWrite(fileName);
             using (var writer = new StreamWriter(file))
             using (var csv = new CsvWriter(writer))
@@ -29,13 +28,11 @@ namespace Energyhelpline.TariffCalculator.Tests.Builders
                 csv.WriteField("Initial rate expiration date (DD/MM/YYYY)");
                 csv.NextRecord();
 
-                foreach (var quote in listOfQuotes)
+                foreach (var quote in _tariffDataModel)
                 {
                     csv.WriteRecord(quote);
                 }
             };
-
-            return listOfQuotes;
         }
     }
 }

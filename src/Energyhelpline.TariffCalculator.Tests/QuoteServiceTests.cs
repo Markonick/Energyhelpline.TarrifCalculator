@@ -37,7 +37,7 @@ namespace Energyhelpline.TariffCalculator.Tests
 
             _repository.Setup(repo => repo.GetQuotes()).Returns(listOfQuotes);
             _strategyResolver.Setup(strategy => strategy.GetEnumFromStrategy("")).Returns(someEnum);
-            _strategyResolver.Setup(strategy => strategy.GetStrategy(someEnum, listOfQuotes.FirstOrDefault())).Returns(new EnergySaverCalculator(listOfQuotes.FirstOrDefault()));
+            _strategyResolver.Setup(strategy => strategy.GetStrategy(someEnum, listOfQuotes.FirstOrDefault())).Returns(new AbstractCalculator(listOfQuotes.FirstOrDefault()));
 
             var bestQuote = _quoteService.GetBestQuote(gasUsage, electricityUsage, startingDate);
 

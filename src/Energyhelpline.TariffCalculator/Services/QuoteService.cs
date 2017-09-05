@@ -10,26 +10,27 @@ namespace Energyhelpline.TariffCalculator.Services
     public class QuoteService : IQuoteService
     {
         private readonly IRepository _quoteRepository;
-        private readonly IStrategyResolver _strategyResolver;
 
-        public QuoteService(IRepository quoteRepository, IStrategyResolver strategyResolver)
+        public QuoteService(IRepository quoteRepository)
         {
             _quoteRepository = quoteRepository;
-            _strategyResolver = strategyResolver;
         }
 
         public QuoteDataModel GetBestQuote(int gasUsage, int electricityUsage, string startingDate)
         {
-            var tariffs = _quoteRepository.GetQuotes();
+            var quotes = _quoteRepository.GetQuotes();
             var tariff = new TariffDataModel();
             var calculators = new List<ICalculator>
             {
-                new EnergySaverCalculator(),
+                new EnergySaverCalculator(inputModel, tariffDataModel),
+                new DiscountEnergyCalculator(),
+                new StandardCalculator(),
+                new SaveOnlineCalculator()
             };
 
             foreach (var quote in quotes)
             {
-                if(quote.);
+                if(quote.Name == "");
             }
 
             var orderedList = quoteList.OrderBy(x => x.AnnualCost);

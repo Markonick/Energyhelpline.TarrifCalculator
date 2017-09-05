@@ -1,26 +1,24 @@
 ﻿using System;
+using Energyhelpline.TariffCalculator.Models;
 
 namespace Energyhelpline.TariffCalculator.Strategies
 {
-    public class StandardCalculator : ICalculator
+    public class StandardCalculator : AbstractCalculator
     {
-        private readonly int _gasUsage;
-        private readonly int _electricityUsage;
-        private readonly decimal _gasRate;
-        private readonly decimal _electricityRate;
+        private readonly InputModel _inputModel;
+        private readonly TariffDataModel _tariffDataModel;
 
-        public StandardCalculator(int gasUsage, int electricityUsage, decimal gasRate, decimal electricityRate)
+        public StandardCalculator(InputModel inputModel, TariffDataModel tariffDataModel)
+            : base(inputModel, tariffDataModel)
         {
-            _gasUsage = gasUsage;
-            _electricityUsage = electricityUsage;
-            _gasRate = gasRate;
-            _electricityRate = electricityRate;
+            _inputModel = inputModel;
+            _tariffDataModel = tariffDataModel;
         }
 
-        public decimal GetTotalAnnualCost()
+        public override decimal GetTotalAnnualCost()
         {
-            var annualGas = GetAnnualCost(_gasUsage, _gasRate);
-            var annualElectricity = GetAnnualCost(_electricityUsage, _electricityRate);
+            var annualGas = GetAnnualCost(_inputModel.GasUsage, _tariffDataModel.InitialGasRate);
+            var annualElectricity = GetAnnualCost(_inputModel.ElectricityUsage, _tariffDataModel.InitialElectricityRate);
 
             return Math.Round(annualGas + annualElectricity, 2);
         }

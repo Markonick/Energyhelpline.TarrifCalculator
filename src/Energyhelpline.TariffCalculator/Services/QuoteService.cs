@@ -16,16 +16,28 @@ namespace Energyhelpline.TariffCalculator.Services
             _quoteRepository = quoteRepository;
         }
 
-        public QuoteDataModel GetBestQuote(int gasUsage, int electricityUsage, string startingDate)
+        public QuoteDataModel GetBestQuote(int gasUsage, int electricityUsage, DateTime startingDate)
         {
             var quotes = _quoteRepository.GetQuotes();
-            var tariff = new TariffDataModel();
+
+            var inputModel = new InputModel
+            {
+                GasUsage = gasUsage,
+                ElectricityUsage = electricityUsage,
+                StartingDate = startingDate
+            };
+
+            var tariffDataModel = new TariffDataModel
+            {
+                Name = quotes.
+            };
+
             var calculators = new List<ICalculator>
             {
                 new EnergySaverCalculator(inputModel, tariffDataModel),
-                new DiscountEnergyCalculator(),
-                new StandardCalculator(),
-                new SaveOnlineCalculator()
+                new DiscountEnergyCalculator(inputModel, tariffDataModel),
+                new StandardCalculator(inputModel, tariffDataModel),
+                new SaveOnlineCalculator(inputModel, tariffDataModel)
             };
 
             foreach (var quote in quotes)
